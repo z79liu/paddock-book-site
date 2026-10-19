@@ -1,0 +1,144 @@
+:root {
+  --bg: #ECEBE6;
+  --surface: #F7F6F2;
+  --ink: #1A1E1B;
+  --muted: #5E655F;
+  --line: #D3D2CB;
+  --primary: #1F3B2D;
+  --on-primary: #F7F6F2;
+  --brass: #A9843A;
+  --brass-hi: #C29D52;
+  --brass-lo: #8A6A2B;
+  --plate-ink: #2A2110;
+  --overdue: #7A1F25;
+  --display: "Rokkitt", Georgia, serif;
+  --body: "Public Sans", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121614;
+    --surface: #1B201D;
+    --ink: #E8EAE6;
+    --muted: #9AA39C;
+    --line: #2D3430;
+    --primary: #8DB89E;
+    --on-primary: #121614;
+    --overdue: #E07A7F;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--body);
+}
+img { max-width: 100%; display: block; }
+a { color: var(--primary); text-underline-offset: 0.18em; }
+a:focus-visible, .button:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+.prose { max-width: 38rem; }
+
+/* Site header: a small plate, like the one on a stall door */
+.site-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 0; }
+.site-head a.home { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); font: 700 1.35rem/1 var(--display); }
+.site-head img { width: 32px; height: 32px; border-radius: 8px; }
+.site-head nav { display: flex; gap: 1.25rem; font-size: 0.95rem; }
+.site-head nav a { color: var(--muted); text-decoration: none; }
+.site-head nav a:hover, .site-head nav a[aria-current] { color: var(--ink); }
+
+/* The brass name plate: the one bold element on the page */
+.plate {
+  position: relative;
+  margin: 2.5rem 0 1.75rem;
+  padding: clamp(1.25rem, 4vw, 2.25rem) clamp(1.5rem, 6vw, 3.5rem);
+  background:
+    linear-gradient(100deg, transparent 0 30%, rgba(255,255,255,.16) 45%, transparent 60%),
+    linear-gradient(180deg, var(--brass-hi), var(--brass) 40%, var(--brass-lo));
+  border: 3px solid var(--plate-ink);
+  border-radius: 8px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.28), inset 0 -3px 0 rgba(0,0,0,.18), 0 2px 0 rgba(0,0,0,.08);
+  color: var(--plate-ink);
+}
+.plate::before, .plate::after {
+  content: "";
+  position: absolute; top: 50%;
+  width: 12px; height: 12px; margin-top: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #d9bd7c, #5a4519 70%);
+}
+.plate::before { left: clamp(0.6rem, 2vw, 1.1rem); }
+.plate::after { right: clamp(0.6rem, 2vw, 1.1rem); }
+.plate h1 {
+  margin: 0;
+  font: 700 clamp(2.6rem, 9vw, 5.75rem)/0.95 var(--display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255,255,255,.35), 0 -1px 0 rgba(0,0,0,.25);
+}
+.plate p { margin: 0.6rem 0 0; font-size: clamp(1rem, 2.4vw, 1.25rem); font-weight: 600; opacity: 0.85; }
+
+/* Due tickets, as they appear at the top of the app's Today screen */
+.tickets { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 0 0 2rem; padding: 0; list-style: none; }
+.tickets li {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  line-height: 1.35;
+}
+.tickets b { display: block; font-weight: 600; font-size: 0.95rem; }
+.tickets span { color: var(--muted); }
+.tickets .overdue { border-color: var(--overdue); }
+.tickets .overdue span { color: var(--overdue); font-weight: 600; }
+
+.lede { font-size: clamp(1.15rem, 2.6vw, 1.4rem); line-height: 1.5; max-width: 34rem; margin: 0 0 1.5rem; }
+.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-bottom: 4rem; }
+.button {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 1.4rem;
+  background: var(--primary); color: var(--on-primary);
+  border-radius: 10px; text-decoration: none; font-weight: 600;
+}
+.cta-row small { color: var(--muted); font-size: 0.95rem; }
+
+/* Features: each one beside the screen it describes */
+.feature { display: grid; gap: 1.5rem 3rem; align-items: center; padding: 3rem 0; border-top: 1px solid var(--line); }
+@media (min-width: 760px) {
+  .feature { grid-template-columns: 1fr 280px; }
+  .feature.flip { grid-template-columns: 280px 1fr; }
+  .feature.flip .phone { order: -1; }
+}
+.feature h2, .prose h2 { font: 700 clamp(1.6rem, 3.6vw, 2.1rem)/1.15 var(--display); margin: 0 0 0.75rem; }
+.feature p { margin: 0 0 0.8rem; max-width: 34rem; }
+.phone {
+  justify-self: center;
+  width: min(280px, 72vw);
+  border: 8px solid var(--plate-ink);
+  border-radius: 34px;
+  overflow: hidden;
+  background: var(--bg);
+  height: auto;
+}
+
+.promises { border-top: 1px solid var(--line); padding: 3rem 0 4rem; }
+.promises h2 { font: 700 clamp(1.6rem, 3.6vw, 2.1rem)/1.15 var(--display); margin: 0 0 1.25rem; }
+.promises ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; max-width: 40rem; }
+.promises li { padding-left: 1.6rem; position: relative; }
+.promises li::before { content: "✓"; position: absolute; left: 0; color: var(--primary); font-weight: 700; }
+
+/* Policy and support pages */
+.page { padding: 2rem 0 4rem; }
+.page h1 { font: 700 clamp(2.2rem, 6vw, 3.2rem)/1.05 var(--display); margin: 1rem 0 0.5rem; }
+.page .updated { color: var(--muted); margin: 0 0 2rem; }
+.prose h2 { font-size: 1.45rem; margin-top: 2.25rem; }
+.prose h3 { font-size: 1.1rem; margin: 1.75rem 0 0.4rem; }
+.prose p, .prose li { max-width: 38rem; }
+.prose ul { padding-left: 1.2rem; }
+.contact { background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 1.1rem 1.25rem; margin: 1.5rem 0; }
+.contact p { margin: 0; }
+
+.site-foot { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.site-foot a { color: var(--muted); }
