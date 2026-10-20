@@ -1,0 +1,97 @@
+/* Hive Notes, Field Sheet direction: a printed inspection sheet on a clipboard. High contrast for bright sun;
+   the hive's box stack is the one drawn element. Tokens match packages/ui beeTheme. */
+:root {
+  --sheet: #FBFBF8;
+  --surface: #FFFFFF;
+  --ink: #141414;
+  --muted: #55524C;
+  --line: #DAD7CF;
+  --propolis: #6B3E1E;
+  --on-propolis: #FFFFFF;
+  --wax: #E8B931;
+  --super: #B27B2A;
+  --alert: #B3261E;
+  --display: "Archivo", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sheet: #24221F;
+    --surface: #3A3733;
+    --ink: #F2EBDD;
+    --muted: #B9AF9C;
+    --line: #4A4640;
+    --propolis: #D79A62;
+    --on-propolis: #1B1714;
+    --wax: #F0C14B;
+    --alert: #E0574A;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--sheet); color: var(--ink); font: 400 1.0625rem/1.6 var(--body); }
+img { max-width: 100%; display: block; }
+a { color: var(--propolis); text-underline-offset: 0.18em; }
+a:focus-visible, .button:focus-visible { outline: 3px solid var(--wax); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+
+.site-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 0; border-bottom: 2px solid var(--ink); }
+.site-head a.home { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); font: 800 1.3rem/1 var(--display); }
+.site-head img { width: 32px; height: 32px; border-radius: 8px; }
+.site-head nav { display: flex; gap: 1.25rem; font-size: 0.95rem; }
+.site-head nav a { color: var(--muted); text-decoration: none; }
+.site-head nav a:hover, .site-head nav a[aria-current] { color: var(--ink); }
+
+/* Hero: the title beside a hive drawn as its boxes, like every hive in the app */
+.hero { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 1.5rem 2.5rem; padding: 3rem 0 2rem; }
+.hero h1 { margin: 0; font: 800 clamp(2.8rem, 9vw, 6rem)/0.92 var(--display); letter-spacing: -0.01em; }
+.hero p { margin: 1rem 0 0; font-size: clamp(1.1rem, 2.6vw, 1.35rem); max-width: 30rem; }
+.stack { display: grid; justify-items: center; gap: 4px; padding-bottom: 0.4rem; }
+.stack i { display: block; width: clamp(96px, 16vw, 150px); border: 3px solid var(--ink); border-radius: 2px; }
+.stack .lid { width: calc(clamp(96px, 16vw, 150px) + 14px); height: 18px; background: var(--wax); border-radius: 4px; }
+.stack .super { height: 30px; background: var(--super); }
+.stack .deep { height: 48px; background: var(--propolis); position: relative; }
+.stack .deep.entrance::after { content: ""; position: absolute; left: 22%; right: 22%; bottom: 6px; height: 8px; background: var(--ink); border-radius: 2px; }
+.stack .stand { width: calc(clamp(96px, 16vw, 150px) + 22px); height: 10px; background: var(--ink); border: 0; }
+@media (max-width: 560px) { .hero { grid-template-columns: 1fr; } .stack { justify-items: start; } }
+
+/* Checklist lines, as on the inspection sheet */
+.sheet { list-style: none; margin: 0 0 2rem; padding: 0; border-top: 2px solid var(--ink); max-width: 40rem; }
+.sheet li { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 56px; border-bottom: 1px solid var(--line); }
+.sheet b { font-weight: 700; }
+.sheet span { font-weight: 700; padding: 0.35rem 0.9rem; border: 2px solid var(--ink); border-radius: 10px; background: var(--wax); color: #141414; }
+.sheet .alert span { background: transparent; color: var(--alert); border-color: var(--alert); }
+
+.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-bottom: 4rem; }
+.button { display: inline-flex; align-items: center; min-height: 56px; padding: 0 1.5rem; background: var(--propolis); color: var(--on-propolis); border-radius: 14px; text-decoration: none; font-weight: 700; }
+.cta-row small { color: var(--muted); font-size: 0.95rem; }
+
+.feature { display: grid; gap: 1.5rem 3rem; align-items: center; padding: 3rem 0; border-top: 1px solid var(--line); }
+@media (min-width: 760px) {
+  .feature { grid-template-columns: 1fr 280px; }
+  .feature.flip { grid-template-columns: 280px 1fr; }
+  .feature.flip .phone { order: -1; }
+}
+.feature h2, .prose h2, .promises h2 { font: 800 clamp(1.5rem, 3.4vw, 2rem)/1.15 var(--display); margin: 0 0 0.75rem; }
+.feature p { margin: 0 0 0.8rem; max-width: 34rem; }
+.phone { justify-self: center; width: min(280px, 72vw); height: auto; border: 8px solid var(--ink); border-radius: 34px; overflow: hidden; background: var(--sheet); }
+
+.promises { border-top: 1px solid var(--line); padding: 3rem 0 4rem; }
+.promises ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; max-width: 40rem; }
+.promises li { padding-left: 1.6rem; position: relative; }
+.promises li::before { content: ""; position: absolute; left: 0; top: 0.45em; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ink); background: var(--wax); }
+
+.page { padding: 2rem 0 4rem; }
+.page h1 { font: 800 clamp(2.2rem, 6vw, 3.2rem)/1.05 var(--display); margin: 1rem 0 0.5rem; }
+.page .updated { color: var(--muted); margin: 0 0 2rem; }
+.prose { max-width: 38rem; }
+.prose h2 { font-size: 1.45rem; margin-top: 2.25rem; }
+.prose h3 { font-size: 1.1rem; margin: 1.75rem 0 0.4rem; }
+.prose ul { padding-left: 1.2rem; }
+.contact { background: var(--surface); border: 2px solid var(--line); border-radius: 12px; padding: 1.1rem 1.25rem; margin: 1.5rem 0; }
+.contact p { margin: 0; }
+
+.site-foot { border-top: 2px solid var(--ink); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.site-foot a { color: var(--muted); }
